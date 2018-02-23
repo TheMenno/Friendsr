@@ -6,20 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Implementing a listener which creates a profile page corresponding to the person they clicked on
     private class GridItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             Friend clickedFriend = (Friend) adapterView.getItemAtPosition(i);
-            // Toast.makeText(MainActivity.this, clickedFriend.getName().toString(), Toast.LENGTH_SHORT).show();
 
+            // Giving the profile info to the next page
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             intent.putExtra("clicked_friend", clickedFriend);
             startActivity(intent);
@@ -47,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         Collections.addAll(friends, Chandler, Joey, Monica, Phoebe, Rachel, Ross);
 
+        // Setting up the listener
         GridView gv = findViewById(R.id.grid);
         gv.setOnItemClickListener(new GridItemClickListener());
 
+        // Setting up the adapter which looks for which item the user clicked on
         GridView grid = findViewById(R.id.grid);
         grid.setAdapter(adapter);
 
